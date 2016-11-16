@@ -60,3 +60,7 @@ include/coap/coap.h
 tests/.deps
 tests/testdriver
 tests/*.o
+
+# install folder
+linux
+rt5350
