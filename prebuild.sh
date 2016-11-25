@@ -12,4 +12,4 @@ else
 	host="--host=mipsel-linux"
 fi
 echo $host $path
-./configure $host --prefix=$path --disable-examples
+./configure CFLAGS=-O2 $host --prefix=$path --disable-examples
