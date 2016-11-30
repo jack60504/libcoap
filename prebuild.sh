@@ -1,15 +1,15 @@
 #!/bin/bash
-cur=$(pwd)/$2
+cur=$(pwd)
 
 if [ "$1"x = "linux"x ]
 then
-	mkdir -f $cur/linux
-	path=$(pwd)/linux
+	test -d ./linux || mkdir -p ./linux
+	path=$cur/linux
 	host=
 else 
-	mkdir -f $cur/rt5350
-	path=$(pwd)/rt5350
+	test -d ./rt5350 || mkdir -p ./rt5350
+	path=$cur/rt5350
 	host="--host=mipsel-linux"
 fi
 echo $host $path
-$cur/configure CFLAGS=-O2 $host --prefix=$path --disable-examples
+./configure CFLAGS=-O2 $host --prefix=$path --disable-examples
