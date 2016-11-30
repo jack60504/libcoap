@@ -1,5 +1,5 @@
 #!/bin/bash
-cur=$(pwd)/libs/libcoap
+cur=$(pwd)/$2
 
 if [ "$1"x = "linux"x ]
 then
