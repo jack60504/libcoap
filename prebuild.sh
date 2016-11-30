@@ -1,15 +1,15 @@
 #!/bin/bash
-cur=$(pwd)
+cur=$(pwd)/libs/libcoap
 
 if [ "$1"x = "linux"x ]
 then
-	mkdir linux
+	mkdir -f $cur/linux
 	path=$(pwd)/linux
 	host=
 else 
-	mkdir rt5350
+	mkdir -f $cur/rt5350
 	path=$(pwd)/rt5350
 	host="--host=mipsel-linux"
 fi
 echo $host $path
-./configure CFLAGS=-O2 $host --prefix=$path --disable-examples
+$cur/configure CFLAGS=-O2 $host --prefix=$path --disable-examples
