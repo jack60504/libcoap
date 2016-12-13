@@ -95,7 +95,7 @@ _coap_is_mcast_impl(const coap_address_t *a) {
 
  switch (a->addr.sa.sa_family) {
  case AF_INET:
-   return IN_MULTICAST(a->addr.sin.sin_addr.s_addr);
+   return IN_MULTICAST(htonl(a->addr.sin.sin_addr.s_addr));
  case  AF_INET6:
    return IN6_IS_ADDR_MULTICAST(&a->addr.sin6.sin6_addr);
  default:  /* fall through and signal error */
