@@ -620,6 +620,7 @@ coap_notify_observers(coap_context_t *context, coap_resource_t *r) {
   coap_pdu_t *response;
 
   if (r->observable && (r->dirty || r->partiallydirty)) {
+	  /* printf("11111111111111111111111111111---\n"); */
     r->partiallydirty = 0;
 
     /* retrieve GET handler, prepare response */
@@ -631,6 +632,7 @@ coap_notify_observers(coap_context_t *context, coap_resource_t *r) {
       if (r->dirty == 0 && obs->dirty == 0)
         /* running this resource due to partiallydirty, but this observation's notification was already enqueued */
         continue;
+	  /* printf("2222222222222222222222222222---\n"); */
 
       coap_tid_t tid = COAP_INVALID_TID;
       obs->dirty = 0;
@@ -659,7 +661,8 @@ coap_notify_observers(coap_context_t *context, coap_resource_t *r) {
 	  && obs->non_cnt < COAP_OBS_MAX_NON) {
 	response->hdr->type = COAP_MESSAGE_NON;
       } else {
-	response->hdr->type = COAP_MESSAGE_CON;
+	/* response->hdr->type = COAP_MESSAGE_CON; */
+	response->hdr->type = COAP_MESSAGE_NON;
       }
       /* fill with observer-specific data */
       h(context, r, &obs->local_if, &obs->subscriber, NULL, &token, response);
@@ -668,9 +671,11 @@ coap_notify_observers(coap_context_t *context, coap_resource_t *r) {
        *  COAP_RESPONSE_CLASS(response->hdr->code) > 2
        */
       if (response->hdr->type == COAP_MESSAGE_CON) {
+		  /* printf("111111111111111111111 CON\n"); */
 	tid = coap_send_confirmed(context, &obs->local_if, &obs->subscriber, response);
 	obs->non_cnt = 0;
       } else {
+		  /* printf("222222222222222222222 NON\n"); */
 	tid = coap_send(context, &obs->local_if, &obs->subscriber, response);
 	obs->non_cnt++;
       }
