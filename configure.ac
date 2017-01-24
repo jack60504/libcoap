@@ -30,6 +30,8 @@ AC_CONFIG_MACRO_DIR([m4])
 m4_pattern_allow([AM_PROG_AR])
 AM_PROG_AR
 
+AC_C_BIGENDIAN
+
 # enable the automatically build of shared and static libraries, the unit
 # tests needs the static library
 LT_INIT([shared static])
@@ -344,6 +346,11 @@ case $host in
 
     *-freebsd1*)
     AC_MSG_RESULT([FreeBSD-1x])
+    ADDITIONAL_CFLAGS="-D_GNU_SOURCE -DWITH_POSIX"
+    ;;
+
+    *kfreebsd*)
+    AC_MSG_RESULT([kFreeBSD])
     ADDITIONAL_CFLAGS="-D_GNU_SOURCE -DWITH_POSIX"
     ;;
 
