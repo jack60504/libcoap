@@ -38,7 +38,7 @@
  * message is sent to detect if observers are alive. The maximum allowed value
  * here is @c 15.
  */
-#define COAP_OBS_MAX_NON   5
+#define COAP_OBS_MAX_NON   2
 #endif /* COAP_OBS_MAX_NON */
 
 #ifndef COAP_OBS_MAX_FAIL
