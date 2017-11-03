@@ -554,13 +554,6 @@ coap_add_observer(coap_resource_t *resource,
   if (s)
     return s;
 
-  LL_FOREACH(resource->subscribers, s) {                                                                 
-	  if (resource->subscribers && s) {
-		  LL_DELETE(resource->subscribers, s);                                                         
-		  COAP_FREE_TYPE(subscription,s);                                                         
-	  }                                                                                                 
-  }
-
   /* s points to a different subscription, so we have to create
    * another one. */
   s = COAP_MALLOC_TYPE(subscription);
